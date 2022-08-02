@@ -1,13 +1,7 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction')
 
-let thoughtValid = [
-    validate({
-        validator: 'isLength',
-        arguments: [1, 280],
-        message: 'Thoughts should be thoughtful (between 1-280 char)'
-    })
-]
+
 
 const thoughtSchema = new Schema(
     {
@@ -15,7 +9,8 @@ const thoughtSchema = new Schema(
             type: String,
             unique: true,
             required: true,
-            validate: thoughtValid
+            minLength: [1, 'Too few'],
+            maxLength: [280, 'Too many']
 
         },
         createdAt: {

@@ -1,24 +1,19 @@
 const {Schema} = require('mongoose');
 
-let reactionValid = [
-    validate({
-        validator: 'isLength',
-        arguments: [1, 280],
-        message: '(between 1-280 char)'
-    })
-]
+
 
 const reactionSchema = new Schema({
-    reactionId: {
-        type: ObjectId,
-        default: new ObjectId,
+    // reactionId: {
+    //     type: ObjectId,
+    //     default: new ObjectId,
         
 
-    },
+    // },
     reactionBody: {
         type: String,
         required: true,
-        validate: reactionValid,
+        minLength: [1, 'Too few'],
+        maxLength: [280, 'Too many']
     },
     createdAt: {
         type: Date,
@@ -31,7 +26,7 @@ const reactionSchema = new Schema({
     },
 })
 
-thoughtSchema.get(function () {
+reactionSchema.get(function () {
     return this.createdAt.default
 })
 
