@@ -76,7 +76,8 @@ module.exports = {
             { runValidators: true, new: true }
             )
             .then((friend) =>
-            !friend
+            !friend,
+            console.log(friend)
             ? res.status(404).json({message: 'Hmm cant delete'})
             : friend.deleteMany({_id: {$in: friend}}))
             .then(() => res.json({ message: 'Friend deleted!' }))
