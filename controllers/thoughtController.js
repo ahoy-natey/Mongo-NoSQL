@@ -79,7 +79,9 @@ module.exports = {
             .then((reaction) =>
             !reaction
             ? res.status(404).json({message: 'Hmm cant delete'})
-            : reaction.deleteMany({_id: {$in: reaction}}))
+            : reaction.deleteMany({_id: {$in: reaction.reactions}}))
+            .then(() => res.json({ message: 'Thought deleted!' }))
+            .catch((err) => res.status(500).json(err));
     }
 
 }
